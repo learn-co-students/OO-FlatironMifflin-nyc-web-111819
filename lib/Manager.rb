@@ -22,7 +22,20 @@ class Manager
     end 
 
     def hire_employee(name, salary)
-        new_employee = Employee.new(name, salary, self)
+        includes = false
+        employee_instance = nil
+        Employee.all.each do |employee|
+            if employee.name == name
+                includes = true
+                employee_instance = employee 
+            end
+        end  
+        if !includes
+            new_employee = Employee.new(name, salary, self)          
+        else 
+            employee_instance.manager = self
+            employee_instance.salary = salary
+         end
     end
 
     def self.all_departments
