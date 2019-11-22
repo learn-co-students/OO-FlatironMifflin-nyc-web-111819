@@ -12,7 +12,7 @@ class Employee
         @@all.select{|employee| employee.salary > salary}
     end
     def self.find_by_department(department)
-        @@all.find{|employee| employee.department == department}
+        @@all.select{|employee| employee.department == department}
     end
     def tax_bracket
         @@all.select{|employee| ((self.salary - employee.salary).abs < 1000) && employee.name != self.name}
